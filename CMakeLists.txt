@@ -42,6 +42,8 @@ include_directories(${ROOT_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR} ${OpenCV_INCLUDE_DI
 #if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 #  message(LALA=${CMAKE_INSTALL_PREFIX})
 #endif()
+#message(STATUS "TBB found: ${TBB_VERSION} at ${TBB_DIR}")
+#message(STATUS "TBB libs: ${TBB_LIBRARIES}")
 
 
 link_directories(${ROOT_LIBRARY_DIR}
@@ -77,7 +79,7 @@ add_executable(digitizationpp
                "${PROJECT_SOURCE_DIR}/src/TrackProcessor.cxx"
                "${PROJECT_SOURCE_DIR}/src/Utils.cxx"
                )
-target_link_libraries(digitizationpp PUBLIC ${ROOT_LIBRARIES} ${OpenCV_LIBS} s3 curl rootana cygnolib z opencv_imgcodecs opencv_core tbb)
+target_link_libraries(digitizationpp PUBLIC ROOT::Imt ${ROOT_LIBRARIES} ${OpenCV_LIBS} TBB::tbb s3 curl rootana cygnolib z)
 
 add_executable(joinPeds
                "${PROJECT_SOURCE_DIR}/joinPeds.cxx"
@@ -87,7 +89,7 @@ add_executable(joinPeds
                "${PROJECT_SOURCE_DIR}/src/TrackProcessor.cxx"
                "${PROJECT_SOURCE_DIR}/src/Utils.cxx"
                )
-target_link_libraries(joinPeds PUBLIC ${ROOT_LIBRARIES} ${OpenCV_LIBS} s3 curl rootana cygnolib z opencv_imgcodecs opencv_core tbb)
+target_link_libraries(joinPeds PUBLIC ROOT::Imt ${ROOT_LIBRARIES} ${OpenCV_LIBS} TBB::tbb s3 curl rootana cygnolib z)
 
 install(TARGETS joinPeds DESTINATION .)
 install(TARGETS digitizationpp DESTINATION .)
